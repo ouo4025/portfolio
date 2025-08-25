@@ -450,6 +450,12 @@
   display: flex;
   align-items: center;
   gap: 9px;
+  opacity: 0.75;
+  transition: all 0.3s;
+}
+
+.about .about-cont .about-right .profile-bio .link-box .link-icon:hover{
+  opacity: 1;
 }
 
 .about .about-cont .about-right .profile-bio .link-box .link-icon > li:nth-child(1){
@@ -962,8 +968,9 @@
   transform: translate(-50%, -50%);
   z-index: 20;
   opacity: 0;
-  /* font-family: 'BoldDungGeunMo'; */
+  transition: all 0.2s;
 }
+
 
 .work .display:hover::before{
   opacity: 1;
@@ -1126,6 +1133,12 @@
   padding: 10px;
   border: 2px solid var(--sub-color);
   cursor: url(../img/cursor_pointer.png) 16 26, auto;
+  transition: all 0.2s;
+}
+
+.project-card .project-card-btn > li > a:hover{
+  background-color: #cf54a4;
+  border: 2px solid #68184c;
 }
 
 .project-card .project-card-btn > li:nth-child(1){
