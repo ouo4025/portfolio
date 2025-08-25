@@ -44,7 +44,7 @@ $(document).ready(function(){
     // introduce 숨기기
     $(".introduce").hide();
 
-    // 모든 박스 숨김
+    // proffile 모든 박스 숨김
     $(".cerificate, .education, .activity, .skill").hide();
 
     // 모든 li에서 active 제거 + 아이콘 초기화
@@ -52,12 +52,12 @@ $(document).ready(function(){
     $(".folder-open").hide();
     $(".folder-close").show();
 
-    // 클릭한 li에 active 추가 + open 상태로 유지
+    // 클릭한 li에 active 추가 + 폴더가 open 상태로 유지
     $(this).addClass("active");
     $(this).find(".folder-close").hide();
     $(this).find(".folder-open").show();
 
-    // 클릭된 li의 index에 따라 해당 박스 보이기
+    // 클릭된 li에 따라 해당 폴더 보이기
     let idx = $(this).index();
     let parentClass = $(this).parent().attr("class");
 
@@ -76,17 +76,17 @@ $(document).ready(function(){
     }
   });
 
-  //hover 시 folder 아이콘 변경
+  //hover 시 폴더 아이콘 변경
   $(".folder-flex01 > li, .folder-flex02 > li").hover(
     function(){
-      // 클릭(active)된 게 아니면 hover 시 open으로
+      // 클릭된 게 아니면 hover 시 open으로
       if(!$(this).hasClass("active")){
         $(this).find(".folder-close").hide();
         $(this).find(".folder-open").show();
       }
     },
     function(){
-      // 클릭(active)된 게 아니면 hover 해제 시 원래대로 close로
+      // 클릭된 게 아니면 hover 해제 시 원래대로 close로
       if(!$(this).hasClass("active")){
         $(this).find(".folder-open").hide();
         $(this).find(".folder-close").show();
@@ -105,7 +105,7 @@ $(document).ready(function(){
     $(".folder-close").show();
   });
 
-    // 1. 처음 상태: .apple만 보이고 나머지 .work는 숨김
+  //처음 상태: .apple만 보이고 나머지 .work는 숨김
   $(".work").hide();
   $(".apple").show();
 
@@ -147,7 +147,7 @@ $(".project-folder > ul > li").on("click", function () {
   const targetWork = works.eq(index);
   targetWork.show();
 
-  // ⭐ 보일 때마다 fade-right 애니메이션 실행
+  // .work fade-right 애니메이션 실행
   gsap.fromTo(
     targetWork.find(".project-card, .main-tit-wrap"),
     { x: 100, opacity: 0 },
@@ -156,7 +156,7 @@ $(".project-folder > ul > li").on("click", function () {
       opacity: 1,
       duration: 1,
       ease: "power2.out",
-      stagger: 0.1 // 카드 여러 개일 경우 순차적으로
+      stagger: 0.1 //순차적으로 애니메이션이 되도록
     }
   );
 
@@ -168,11 +168,11 @@ $(".project-folder > ul > li").on("click", function () {
       opacity: 1,
       duration: 1,
       ease: "power2.out",
-      stagger: 0.1 // 카드 여러 개일 경우 순차적으로
+      stagger: 0.1 
     }
   );
 
-  // 폴더 아이콘 상태 관리
+  // project 폴더 아이콘 
   $(".project-folder > ul > li .p-folder-open").hide();
   $(".project-folder > ul > li .p-folder-close").show();
   $(this).find(".p-folder-close").hide();
@@ -181,21 +181,20 @@ $(".project-folder > ul > li").on("click", function () {
 
 
   
-// .main-tit hover 시 display 이미지 위아래 스크롤 애니메이션
+// display hover 시 이미지 스크롤 애니메이션
 $(document).on("mouseenter", ".work .main-tit", function(){
   let $mainTit = $(this);
   let $img = $mainTit.find(".display img");
   let $box = $mainTit.find(".display");
 
-  let imgHeight = $img[0].naturalHeight || $img.height(); // 실제 이미지 높이
+  let imgHeight = $img[0].naturalHeight || $img.height(); 
   let boxHeight = $box.height();
-  let moveY = boxHeight - imgHeight; // 올라갈 거리 (음수)
+  let moveY = boxHeight - imgHeight; 
 
   if(moveY < 0){
-    // 기존 애니메이션이 있다면 제거
+
     if($img.data("tween")) $img.data("tween").kill();
 
-    // 새로운 애니메이션 저장
     let tween = gsap.to($img, {
       y: moveY,
       duration: 25,
@@ -214,25 +213,25 @@ $(document).on("mouseleave", ".work .main-tit", function(){
   gsap.to($img, { y: 0, duration: 1 });
 });
 
-// .mobile hover 시 .mobile-home img 위아래 스크롤 애니메이션
+//display hover 시 이미지 스크롤 애니메이션(모바일)
 $(document).on("mouseenter", ".mobile", function(){
   let $mobile = $(this);
   let $img = $mobile.find(".mobile-home img");
-  if($img.length === 0) return; // .mobile-home이 없는 경우 제외
+  if($img.length === 0) return; 
   let $box = $mobile.find(".mobile-home");
 
-  let imgHeight = $img[0].naturalHeight || $img.height(); // 실제 이미지 높이
+  let imgHeight = $img[0].naturalHeight || $img.height();
   let boxHeight = $box.height();
-  let moveY = boxHeight - imgHeight; // 올라갈 거리 (음수)
+  let moveY = boxHeight - imgHeight; 
 
   if(moveY < 0){
-    // 기존 애니메이션이 있다면 제거
+   
     if($img.data("tween")) $img.data("tween").kill();
 
-    // 새로운 애니메이션 저장
+    
     let tween = gsap.to($img, {
       y: moveY,
-      duration: 10,   // 이동 속도 (원하면 줄이면 더 빠름)
+      duration: 10,   // 이동 속도
       ease: "none",
       repeat: -1,
       yoyo: true
@@ -250,30 +249,28 @@ $(document).on("mouseleave", ".mobile", function(){
 });
 
 
-/* --------------------------------
-  .main-visual ::before, ::after 반짝이는 효과 (on/off)
--------------------------------- */
+//.main-visual 반짝이는 효과 
 gsap.set(".twinkle-left, .twinkle-right", { opacity: 0 }); // 시작은 투명
 gsap.to(".twinkle-left, .twinkle-right", {
   opacity: 1,
-  duration: 0,        // 부드러운 transition 없이 바로 1로
+  duration: 0,        
   repeat: -1,
   yoyo: true,
-  repeatDelay: 0.4    // 깜빡이는 간격 (조절 가능)
+  repeatDelay: 0.4    // 깜빡이는 간격
 });
 
-gsap.set(".twinkle2-left, .twinkle2-right", { opacity: 0 }); // 시작은 투명
+
+//.profile 반짝이는 효과
+gsap.set(".twinkle2-left, .twinkle2-right", { opacity: 0 }); 
 gsap.to(".twinkle2-left, .twinkle2-right", {
   opacity: 1,
-  duration: 0,        // 부드러운 transition 없이 바로 1로
+  duration: 0,        
   repeat: -1,
   yoyo: true,
-  repeatDelay: 0.8    // 깜빡이는 간격 (조절 가능)
+  repeatDelay: 0.8   
 });
 
-  /* --------------------------------
-   2. .start-btn 반짝 효과 + hover 시 멈춤
-   -------------------------------- */
+   //.start-btn 반짝이는 효과 + hover 시 멈춤
   let startBtnTween = gsap.to(".start-btn", {
     opacity: 0.4,
     duration: 0.8,
@@ -284,19 +281,17 @@ gsap.to(".twinkle2-left, .twinkle2-right", {
 
   $(".start-btn").hover(
     function() {
-      // hover in → 멈춤
+      // hover시 멈춤
       startBtnTween.pause();
       gsap.to(".start-btn", { opacity: 1, duration: 0.3 });
     },
     function() {
-      // hover out → 다시 실행
+      // hover out시 다시 실행
       startBtnTween.resume();
     }
   );
 
-  /* --------------------------------
-   3. .start-btn 클릭 시 .profile로 이동
-   -------------------------------- */
+ //.start-btn 클릭 시 .profile로 이동
   $(".start-btn").on("click", function() {
     gsap.to(window, {
       duration: 1,
@@ -307,14 +302,11 @@ gsap.to(".twinkle2-left, .twinkle2-right", {
 
 
 
-/* --------------------------------
-  4. .main-tit-intro 텍스트 타이핑 효과 + 끝나면 start-btn 보이기
--------------------------------- */
+ //.main-tit-intro 텍스트 타이핑 효과 + 끝나면 start-btn 보이기
 let introEl = $(".main-tit-intro");
 let introText = introEl.text().trim();
-introEl.text(""); // 초기화
+introEl.text(""); 
 
-// 처음엔 start-btn 숨김
 $(".start-btn").hide();
 
 gsap.to({}, {
@@ -326,7 +318,7 @@ gsap.to({}, {
     introEl.text(introText.substring(0, charCount));
   },
   onComplete: function() {
-    // 타이핑 끝나면 start-btn 나타남 (페이드인)
+    // 타이핑 끝나면 start-btn 나타남
     gsap.to(".start-btn", { autoAlpha: 1, duration: 1, display: "block" });
   }
 });
@@ -342,7 +334,7 @@ ScrollTrigger.create({
   scrub: true
 });
 
-// .introduce 90년대 픽셀게임 감성 켜짐 + introduce-txt 타이핑
+// .introduce 애니메이션 + introduce-txt 타이핑
 ScrollTrigger.create({
   trigger: ".profile",
   start: "top 80%",
@@ -351,7 +343,7 @@ ScrollTrigger.create({
     const introduceEl = document.querySelector(".introduce");
     const introduceTxtEl = document.querySelector(".introduce-txt p");
 
-    // introduce 기본 상태: 가운데 점처럼
+    
     gsap.set(introduceEl, { 
       scaleX: 0,
       scaleY: 0.05,
@@ -362,7 +354,7 @@ ScrollTrigger.create({
     // introduce-txt는 처음에 숨김
     gsap.set(".introduce-txt", { autoAlpha: 0 });
 
-    // CRT 게임 감성 애니메이션
+    // CRT 애니메이션
     gsap.timeline()
       // 깜빡 켜짐
       .to(introduceEl, { opacity: 1, duration: 0.1 })
@@ -417,7 +409,7 @@ ScrollTrigger.create({
   }
 });
 
-// CRT 모니터 켜지는 효과 (텍스트 타이핑 제외)
+// CRT 애니메이션 (텍스트 타이핑 제외)
 function crtBoxAnimation(targetBox) {
   if(!targetBox || targetBox.length === 0) return;
 
@@ -439,7 +431,7 @@ function crtBoxAnimation(targetBox) {
       opacity: 1,
       duration: 0.2,
       onComplete: () => {
-        // ✅ skill일 때만 프로그레스바 애니메이션 실행
+        // skill일 때만 프로그레스바 애니메이션 실행
         if (targetBox.hasClass("skill")) {
           animateProgressBars();
         }
@@ -451,9 +443,9 @@ function crtBoxAnimation(targetBox) {
     
 }
 
-// 폴더 클릭 이벤트 수정 (folder-flex01 + folder-flex02 모두 포함)
+// 폴더 클릭 이벤트
 $(".folder-flex01 > li, .folder-flex02 > li").on("click", function(){
-  $(".introduce").hide(); // introduce 숨기기
+  $(".introduce").hide(); 
   $(".cerificate, .education, .activity, .skill").hide();
 
   let idx = $(this).index();
@@ -481,12 +473,12 @@ $(".folder-flex01 > li, .folder-flex02 > li").on("click", function(){
 });
 
 
-// skill-bar 채우기 애니메이션 함수
+// skill-bar 채우기 애니메이션 
 function animateProgressBars() {
   document.querySelectorAll(".skill-txt .progress").forEach(bar => {
     const targetWidth = window.getComputedStyle(bar).width;
 
-    // 시작 상태: 안 보이게 + width 0
+    // 시작 상태: 안 보이게(width 0)
     gsap.set(bar, { width: 0, autoAlpha: 0 });
 
     // 나타나면서 width 늘어나기
@@ -513,7 +505,7 @@ ScrollTrigger.create({
 
 
 
-// .project-folder 원 모양 커지는 애니메이션 (딜레이 + 느리게)
+// .project-folder 원 메모양 커지는 애니이션
 ScrollTrigger.create({
   trigger: ".project",
   start: "top 80%", // .project가 화면 80% 지점에 들어올 때 실행
@@ -524,8 +516,8 @@ ScrollTrigger.create({
       { 
         scale: 1, 
         opacity: 1, 
-        duration: 2,   // ⏳ 느리게 (기존 1초 → 2초)
-        delay: 0.5,    // ⏱ 시작 딜레이 추가
+        duration: 2,   
+        delay: 0.5,    
         ease: "power2.out" 
       }
     );
@@ -548,7 +540,7 @@ ScrollTrigger.create({
   onEnter: () => {
     setTimeout(() => {
       $(".project-folder").addClass("blink");
-    }, 800); // 0.8초 딜레이 후 실행 (원하는 값으로 조정 가능)
+    }, 800); // 0.8초 딜레이 후 실행
   },
   onLeaveBack: () => {
     $(".project-folder").removeClass("blink");
@@ -567,20 +559,15 @@ ScrollTrigger.create({
 });
 
 
-//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-/* ================================
-   PROJECT & GRAPHIC 섹션 애니메이션
-   (main.js의 document.ready 내부 마지막에 추가)
-================================ */
 
-// 1) .project 도달 시 .project-card, .main-tit-wrap → AOS fade-right 유사 효과
-//    - 오른쪽에서 살짝 들어오며(opacity 0 → 1, x 50 → 0)
+
+//.project fade-right
 gsap.set(".project .project-card, .project .main-tit-wrap", { opacity: 0, x: 50 });
 
 ScrollTrigger.batch(".project .work", {
   start: "top 80%",
   onEnter: (batch) => {
-    // work 컨테이너가 들어오면, 그 안의 요소들 개별 페이드-라이트
+   
     batch.forEach(section => {
       const cards = section.querySelectorAll(".project-card");
       const titles = section.querySelectorAll(".main-tit-wrap");
@@ -602,9 +589,7 @@ ScrollTrigger.batch(".project .work", {
 });
 
 
-// 2) .graphic 도달 시 .graphic-tit-wrap (원) 커지기
-//    - 기존 .project-circle 과 동일한 방식(부드럽게 scale)
-//    - 초기값은 CSS에서 따로 주지 않아도 fromTo로 세팅
+//.graphic-tit-wrap 원 커지기
 ScrollTrigger.create({
   trigger: ".graphic",
   start: "top 80%",
@@ -618,8 +603,7 @@ ScrollTrigger.create({
 });
 
 
-// 3) .graphic-wrap02 우측에서 슬라이드 인 → 끝나고 .graphic-wrap fade-right
-//    - wrap02: right:-100% → 0 (처음엔 안 보이게)
+//.graphic-wrap02 slide in → .graphic-wrap02 fade-right
 gsap.set(".graphic-wrap02", { opacity: 0, right: "-100%", position: "absolute" });
 gsap.set(".graphic-wrap", { opacity: 0, x: 50 }); // 이후에 fade-right로 등장
 
@@ -648,13 +632,7 @@ ScrollTrigger.create({
 });
 
 
-// 4) .graphic-wrap 애니메이션이 끝나면
-//    - .card-left 는 위로 천천히 (Y 음수로)
-//    - .card-right 는 아래로 천천히 (Y 양수로)
-//    - 리스트 끝나면 다시 처음으로(무한 루프)
-//    - 스크롤 구간동안만 동작하도록 ScrollTrigger + scrub
-// li 전체 높이만큼 이동하도록 수정
-// 리스트 무한 롤링 (끊기지 않게 li 복제 방식)
+// .graphic card 스크롤링
 function loopVerticalList(selector, duration = 30, direction = "up") {
   const $ul = $(selector);
   const $lis = $ul.children("li");
@@ -662,7 +640,7 @@ function loopVerticalList(selector, duration = 30, direction = "up") {
   if ($ul.data("cloned")) return;
   $ul.data("cloned", true);
 
-  // li 복제 → 두 배 길이
+  // li 복제 (두 배 길이)
   $lis.clone().appendTo($ul);
 
   const listHeight = $lis.outerHeight(true) * $lis.length;
@@ -721,13 +699,10 @@ ScrollTrigger.create({
 });
 
 
-
-/* ================================
-   FOOTER 텍스트 타이핑 + 아이콘 페이드업
-================================ */
+//footer 텍스트 타이핑 + 아이콘 fade up
 $(document).ready(function(){
 
-  // footer 기본 숨김 처리
+  // footer 숨김 
   gsap.set("footer .footer-tit p, footer .footer-icons", { autoAlpha: 0 });
 
   function typeText($el, text, speed = 80, onComplete) {
@@ -747,7 +722,7 @@ $(document).ready(function(){
 
   ScrollTrigger.create({
     trigger: "footer",
-    start: "top 80%",  // footer가 화면 들어올 때 실행
+    start: "top 80%", 
     once: true,
     onEnter: () => {
       const $p1 = $("footer .footer-tit p:nth-of-type(1)");
@@ -761,9 +736,9 @@ $(document).ready(function(){
       $p1.text("");
       $p2.text("");
 
-      // ⭐ 첫 번째 문장은 느리게 (150ms)
+       //첫 번째 문장은 느리게
       typeText($p1, text1, 150, () => {
-        // 두 번째 문장은 기존 속도 (60ms)
+        
         typeText($p2, text2, 60, () => {
           // 두 번째 문장 끝나면 아이콘 fade-up
           gsap.fromTo($icons,
@@ -779,9 +754,7 @@ $(document).ready(function(){
 
 });
 
-/* ================================
-   FOOTER 아이콘 클릭 → 복사 + 토스트 메시지
-================================ */
+//footer 아이콘 클릭시 복사 + 토스트 메시지
 function copyToClipboard(text, message) {
   navigator.clipboard.writeText(text).then(() => {
     showToast(message);
@@ -811,12 +784,12 @@ function showToast(message) {
   }, 1500);
 }
 
-// 메일 아이콘 클릭 (2번째 li)
+// 메일 아이콘 클릭 
 $(document).on("click", "footer .footer-icons > li:nth-child(2)", function() {
   copyToClipboard("jgb09130@gmail.com", "메일을 복사했습니다.");
 });
 
-// 전화 아이콘 클릭 (3번째 li)
+// 전화 아이콘 클릭
 $(document).on("click", "footer .footer-icons > li:nth-child(3)", function() {
   copyToClipboard("01040253842", "전화번호를 복사했습니다.");
 });

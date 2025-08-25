@@ -16,9 +16,9 @@ body{
    font-style: normal;
    color: #313131;
    font-size: 17px;
-   cursor: url(../img/cursor_icon2.png) 16 26, auto;
+   cursor: url(../img/cursor_icon2.png) 0 0, auto;
 }
 
 a:hover {
-  cursor: url(../img/cursor_pointer.png) 16 26, pointer;
+  cursor: url(../img/cursor_pointer.png) 0 0, pointer;
 }
